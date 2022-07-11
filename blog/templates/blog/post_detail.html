@@ -1,0 +1,59 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <article class=" content-section">
+        <div class="media">
+            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">  
+            <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="#">{{ object.author }}</a>
+                <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+                {% if object.author == user %}
+                    <div>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                    </div>
+                {% endif %}
+                </div>
+                <h2 class="article-title">{{ object.title }}</h2>
+                <p class="article-content">{{ object.content }}</p>
+            </div>
+            <hr>
+            <h2>Comments ...</h2>
+            <hr>
+            {% if not post.comments.all%}
+                No Comments Yet... <a href="{% url "add-comment" object.pk %}">Add Comment</a>
+            {% else %}
+                {% for comment in post.comments.all %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="panel panel-default widget">
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-2 col-md-1">
+                                                    <img src="{{comment.name.profile.image.url}}" class="rounded-circle article-img" alt="" /></div>
+                                                <div class="col-xs-10 col-md-11">
+                                                    <div>
+                                                        <div class="mic-info">
+                                                            By: <a href="#">{{comment.name}}</a> on {{comment.date_posted}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-text">
+                                                        {{comment.content}}
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <a href="{% url "add-comment" object.id %}" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> Add comment</a>
+            {% endif %}
+        </div>
+    </article>
+{% endblock content %}
