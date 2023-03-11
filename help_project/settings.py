@@ -66,6 +66,10 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = ['https://web-production-8f9b.up.railway.app/',]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-8f9b.up.railway.app'
+]
+
 ROOT_URLCONF = 'help_project.urls'
 
 TEMPLATES = [
