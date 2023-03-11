@@ -47,13 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fontawesomefree'
+    'fontawesomefree',
+    "corsheaders",
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -61,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = ['https://web-production-8f9b.up.railway.app/',]
 
 ROOT_URLCONF = 'help_project.urls'
 
@@ -82,7 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'help_project.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-8f9b.up.railway.app/']
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
